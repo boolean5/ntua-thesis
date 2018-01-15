@@ -15,7 +15,6 @@ HOST_1=172.31.17.126
 HOST_2=172.31.21.43
 HOST_3=172.31.16.202
 
-# KEY_PATH="~/Desktop/Link\ to\ DIPLOMA/official_benchmarks/id_rsa.pem"
 KEY_PATH="../../id_rsa.pem"
 
 # etcdctl & benchmark variables
