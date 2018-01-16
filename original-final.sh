@@ -15,7 +15,6 @@ HOST_1=172.31.17.126
 HOST_2=172.31.21.43
 HOST_3=172.31.16.202
 
-# KEY_PATH="~/Desktop/Link\ to\ DIPLOMA/official_benchmarks/id_rsa.pem"
 KEY_PATH="../../id_rsa.pem"
 
 # etcdctl & benchmark variables
@@ -126,51 +125,51 @@ function bench3roundsfilled {
 }
 
 
-#echo "*********************** benchmark B1 **********************" >> ${OUTPUT_FILE}
-#BENCH_COMMAND="benchmark --endpoints=${HOST_1}:2379 --target-leader --conns=1 --clients=1 put --key-size=8 --sequential-keys --total=10000 --val-size=256"
-#bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
+echo "*********************** benchmark B1 **********************" >> ${OUTPUT_FILE}
+BENCH_COMMAND="benchmark --endpoints=${HOST_1}:2379 --target-leader --conns=1 --clients=1 put --key-size=8 --sequential-keys --total=10000 --val-size=256"
+bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
 
-#echo "*********************** benchmark B2 **********************" >> ${OUTPUT_FILE}
-#BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=100 --clients=1000 put --key-size=8 --sequential-keys --total=100000 --val-size=256"
-#bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
+echo "*********************** benchmark B2 **********************" >> ${OUTPUT_FILE}
+BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=100 --clients=1000 put --key-size=8 --sequential-keys --total=100000 --val-size=256"
+bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
 
-#echo "*********************** benchmark B3 **********************" >> ${OUTPUT_FILE}
-#BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=1 --clients=1 range foo --consistency=l --total=10000" 
-#bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
+echo "*********************** benchmark B3 **********************" >> ${OUTPUT_FILE}
+BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=1 --clients=1 range foo --consistency=l --total=10000" 
+bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
 
-#echo "*********************** benchmark B4 **********************" >> ${OUTPUT_FILE}
-#BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=100 --clients=1000 range foo --consistency=l --total=100000"
-#bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
+echo "*********************** benchmark B4 **********************" >> ${OUTPUT_FILE}
+BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=100 --clients=1000 range foo --consistency=l --total=100000"
+bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
 
-#echo "*********************** benchmark B5 **********************" >> ${OUTPUT_FILE}
-#BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=1 --clients=1 put --key-size=8 --sequential-keys=false --key-space-size=100000 --total=100000 --val-size=256"
-#bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
+echo "*********************** benchmark B5 **********************" >> ${OUTPUT_FILE}
+BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=1 --clients=1 put --key-size=8 --sequential-keys=false --key-space-size=100000 --total=100000 --val-size=256"
+bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
 
-#echo "*********************** benchmark B6 **********************" >> ${OUTPUT_FILE}
-#BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=10 --clients=10 put --key-size=8 --sequential-keys=false --key-space-size=100000 --total=100000 --val-size=256"
-#bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
+echo "*********************** benchmark B6 **********************" >> ${OUTPUT_FILE}
+BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=10 --clients=10 put --key-size=8 --sequential-keys=false --key-space-size=100000 --total=100000 --val-size=256"
+bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
 
-#echo "*********************** benchmark B7 **********************" >> ${OUTPUT_FILE}
-#BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=100 --clients=100 put --key-size=8 --sequential-keys=false --key-space-size=100000 --total=100000 --val-size=256"
-#bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
+echo "*********************** benchmark B7 **********************" >> ${OUTPUT_FILE}
+BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=100 --clients=100 put --key-size=8 --sequential-keys=false --key-space-size=100000 --total=100000 --val-size=256"
+bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
 
-#echo "*********************** benchmark B8 **********************" >> ${OUTPUT_FILE}
-#BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=100 --clients=1000 put --key-size=8 --sequential-keys=false --key-space-size=100000 --total=100000 --val-size=256"
-#bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
+echo "*********************** benchmark B8 **********************" >> ${OUTPUT_FILE}
+BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=100 --clients=1000 put --key-size=8 --sequential-keys=false --key-space-size=100000 --total=100000 --val-size=256"
+bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
 
-#echo "*********************** benchmark B9 **********************" >> ${OUTPUT_FILE}
-#BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=100 --clients=1000 put --key-size=8 --sequential-keys=false --key-space-size=1000000 --total=1000000 --val-size=256"
+echo "*********************** benchmark B9 **********************" >> ${OUTPUT_FILE}
+BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=100 --clients=1000 put --key-size=8 --sequential-keys=false --key-space-size=1000000 --total=1000000 --val-size=256"
 # take a disk size measurement with du -sh db
-#bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
+bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
 
-#echo "*********************** benchmark B10 **********************" >> ${OUTPUT_FILE}
-#BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=100 --clients=1000 put --key-size=8 --sequential-keys --total=1000000 --val-size=256"
-#bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
+echo "*********************** benchmark B10 **********************" >> ${OUTPUT_FILE}
+BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=100 --clients=1000 put --key-size=8 --sequential-keys --total=1000000 --val-size=256"
+bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
 
-#echo "*********************** benchmark B11 **********************" >> ${OUTPUT_FILE}
-#BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=100 --clients=1000 put --key-size=8 --sequential-keys=false --key-space-size=10000000 --total=10000000 --val-size=256"
+echo "*********************** benchmark B11 **********************" >> ${OUTPUT_FILE}
+BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=100 --clients=1000 put --key-size=8 --sequential-keys=false --key-space-size=10000000 --total=10000000 --val-size=256"
 # take a disk size measurement with du -sh db
-#bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
+bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
 
 # B12
 

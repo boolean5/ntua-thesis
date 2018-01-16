@@ -15,7 +15,6 @@ HOST_1=172.31.17.126
 HOST_2=172.31.21.43
 HOST_3=172.31.16.202
 
-# KEY_PATH="~/Desktop/Link\ to\ DIPLOMA/official_benchmarks/id_rsa.pem"
 KEY_PATH="../../id_rsa.pem"
 
 # etcdctl & benchmark variables
@@ -136,7 +135,7 @@ bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
 
 echo "*********************** benchmark B9 **********************" >> ${OUTPUT_FILE}
 BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=100 --clients=1000 put --key-size=8 --sequential-keys=false --key-space-size=1000000 --total=1000000 --val-size=256"
- #take a disk size measurement with du -sh db
+# take a disk size measurement with du -sh db
 bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
 
 echo "*********************** benchmark B19 **********************" >> ${OUTPUT_FILE}
