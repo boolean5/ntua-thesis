@@ -15,6 +15,7 @@ HOST_1=172.31.17.126
 HOST_2=172.31.21.43
 HOST_3=172.31.16.202
 
+# KEY_PATH="~/Desktop/Link\ to\ DIPLOMA/official_benchmarks/id_rsa.pem"
 KEY_PATH="../../id_rsa.pem"
 
 # etcdctl & benchmark variables
@@ -71,9 +72,9 @@ function bench3rounds {
                 ssh -i ${KEY_PATH} ${CLIENT}@${CLIENT_IP} "${BIN_PATH}$1" >> ${OUTPUT_FILE}
 
                 echo "Benchmark completed. Destroying cluster and cleaning data-dirs" >> ${OUTPUT_FILE}
-                ssh -i ${KEY_PATH} ${USER_1}@${SERVER_IP_1} "kill \`pidof etcd\`; sudo rm -r /mnt/etcd/data.etcd"
-                ssh -i ${KEY_PATH} ${USER_2}@${SERVER_IP_2} "kill \`pidof etcd\`; sudo rm -r /mnt/etcd/data.etcd"
-                ssh -i ${KEY_PATH} ${USER_3}@${SERVER_IP_3} "kill \`pidof etcd\`; sudo rm -r /mnt/etcd/data.etcd"
+                ssh -i ${KEY_PATH} ${USER_1}@${SERVER_IP_1} "sudo kill \`pidof etcd\`; sudo rm -r /mnt/etcd/data.etcd"
+                ssh -i ${KEY_PATH} ${USER_2}@${SERVER_IP_2} "sudo kill \`pidof etcd\`; sudo rm -r /mnt/etcd/data.etcd"
+                ssh -i ${KEY_PATH} ${USER_3}@${SERVER_IP_3} "sudo kill \`pidof etcd\`; sudo rm -r /mnt/etcd/data.etcd"
 
                 sleep 10s
         done
@@ -108,7 +109,7 @@ function bench3roundsfilled {
 
                 echo "Filling up the store..." >> ${OUTPUT_FILE}
                 ssh -i ${KEY_PATH} ${CLIENT}@${CLIENT_IP} "${BIN_PATH}${FILL}"
-                ssh -i ${KEY_PATH} ${CLIENT}@${CLIENT_IP} "export ETCDCTL_API=3; ${BIN_PATH}etcdctl put a s; ${BIN_PATH}etcdctl put b s; ${BIN_PATH}etcdctl put c s; ${BIN_PATH}etcdctl put d s; ${BIN_PATH}etcdctl put e s; ${BIN_PATH}etcdctl put f s; ${BIN_PATH}etcdctl put g s; ${BIN_PATH}etcdctl put h s; ${BIN_PATH}etcdctl put i s; ${BIN_PATH}etcdctl put j s; ${BIN_PATH}etcdctl put k s; ${BIN_PATH}etcdctl put l s; ${BIN_PATH}etcdctl put m s; ${BIN_PATH}etcdctl put n s; ${BIN_PATH}etcdctl put o s; ${BIN_PATH}etcdctl put p s; ${BIN_PATH}etcdctl put q s; ${BIN_PATH}etcdctl put r s; ${BIN_PATH}etcdctl put s s; ${BIN_PATH}etcdctl put t s; ${BIN_PATH}etcdctl put u s; ${BIN_PATH}etcdctl put v s; ${BIN_PATH}etcdctl put w s; ${BIN_PATH}etcdctl put x s; ${BIN_PATH}etcdctl put y s; ${BIN_PATH}etcdctl put z s;"
+                ssh -i ${KEY_PATH} ${CLIENT}@${CLIENT_IP} "export ETCDCTL_API=3; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put a s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put b s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put c s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put d s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put e s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put f s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put g s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put h s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put i s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put j s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put k s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put l s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put m s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put n s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put o s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put p s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put q s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put r s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put s s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put t s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put u s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put v s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put w s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put x s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put y s; ${BIN_PATH}etcdctl --endpoints=${ENDPOINTS} put z s;"
 
                 echo "Done filling up the store." >> ${OUTPUT_FILE}
 
@@ -116,9 +117,9 @@ function bench3roundsfilled {
 
                 echo "Benchmark completed. Destroying cluster and cleaning data-dirs" >> ${OUTPUT_FILE}
 
-                ssh -i ${KEY_PATH} ${USER_1}@${SERVER_IP_1} "kill `pidof etcd`"; "sudo rm -r /mnt/etcd/data.etcd"
-                ssh -i ${KEY_PATH} ${USER_2}@${SERVER_IP_2} "kill `pidof etcd`"; "sudo rm -r /mnt/etcd/data.etcd"
-                ssh -i ${KEY_PATH} ${USER_3}@${SERVER_IP_3} "kill `pidof etcd`"; "sudo rm -r /mnt/etcd/data.etcd"
+                ssh -i ${KEY_PATH} ${USER_1}@${SERVER_IP_1} "sudo kill \`pidof etcd\`; sudo rm -r /mnt/etcd/data.etcd"
+                ssh -i ${KEY_PATH} ${USER_2}@${SERVER_IP_2} "sudo kill \`pidof etcd\`; sudo rm -r /mnt/etcd/data.etcd"
+                ssh -i ${KEY_PATH} ${USER_3}@${SERVER_IP_3} "sudo kill \`pidof etcd\`; sudo rm -r /mnt/etcd/data.etcd"
 
                 sleep 10s
         done
@@ -132,9 +133,10 @@ bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
 echo "*********************** benchmark B8 **********************" >> ${OUTPUT_FILE}
 BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=100 --clients=1000 put --key-size=8 --sequential-keys=false --key-space-size=100000 --total=100000 --val-size=256"
 bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
+
 echo "*********************** benchmark B9 **********************" >> ${OUTPUT_FILE}
 BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=100 --clients=1000 put --key-size=8 --sequential-keys=false --key-space-size=1000000 --total=1000000 --val-size=256"
-# take a disk size measurement with du -sh db
+ #take a disk size measurement with du -sh db
 bench3rounds "$BENCH_COMMAND" "$TEST_COMMAND"
 
 echo "*********************** benchmark B19 **********************" >> ${OUTPUT_FILE}
@@ -157,9 +159,6 @@ echo "*********************** benchmark B23 **********************" >> ${OUTPUT_
 BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=100 --clients=1000 range a z --consistency=l --total=100000"
 bench3roundsfilled "$BENCH_COMMAND" "$TEST_COMMAND"
 
-echo "*********************** benchmark B24 **********************" >> ${OUTPUT_FILE}
-BENCH_COMMAND="benchmark --endpoints=${ENDPOINTS} --conns=100 --clients=1000 range a z --consistency=l --total=1000000"
-bench3roundsfilled "$BENCH_COMMAND" "$TEST_COMMAND"
 
 echo "Script execution has completed successfully :)" >> ${OUTPUT_FILE}
 
